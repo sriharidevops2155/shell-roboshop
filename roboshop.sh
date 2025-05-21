@@ -25,10 +25,4 @@ do
 done
 
 
-aws ec2 describe-instances \
-    --instance-ids i-0abcdef1234567890 \
-    --query "Reservations[0].Instances[0].PrivateIpAddress" \
-    --output text
-
-
 
