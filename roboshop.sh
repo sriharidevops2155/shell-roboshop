@@ -9,10 +9,10 @@ DOMAIN_NAME="daws84s.cloud"
 for instance in ${INSTANCES[@]}
 do
     INSTANCE_ID=$(aws ec2 run-instances \
-    --image-id ami-09c813fb71547fc4f \
+    --image-id $AMI_ID \
     --instance-type t2.micro \
-    --security-group-ids sg-06bb0f34e665a4180 \
-    --tag-specifications '{"ResourceType":"instance", "Tags": [{"Key": "Name", "Value": "Test-01-Instance"}]}' \
+    --security-group-ids $SG_ID \
+    --tag-specifications "ResourceType=instance, Tags= [{Key=Name, Value=$instance}]" \
     --query "Instances[0].InstanceId" \
     --output text)
     if [ $instance != "frontend" ]
