@@ -29,13 +29,13 @@ do
   {
     "Comment": "Creating or updating a record set for cognito endpoint"
     ,"Changes": [{
-      "Action"              : "UPSERT"
-      ,"ResourceRecordSet"  : {
+    "Action"              : "UPSERT"
+    ,"ResourceRecordSet"  : {
         "Name"              : "'$instance'.'$DOMAIN_NAME'"
         ,"Type"             : "A"
         ,"TTL"              : 1
         ,"ResourceRecords"  : [{
-        "Value"             : "'$IP'"
+          "Value"             : "'$IP'"
         }]
       }
     }]
