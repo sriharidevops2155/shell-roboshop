@@ -55,12 +55,13 @@ else
     echo -e "System user roboshop is alread created... $Y skipping $N"
 fi
 
-mkdir -p /app 
+mkdir -p /app   
 VALIDATE $? "Creating app directory"
 
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip &>>$LOG_FILE
 VALIDATE $? "Downloading the catalogue app"
 
+rm -rf /app/*
 cd /app 
 VALIDATE $? "Moving to app directory"
 
