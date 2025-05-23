@@ -78,9 +78,7 @@ dnf install mysql -y &>>$LOG_FILE
 VALIDATE $? "Installing my sql"
 
 mysql -h mysql.daws84s.cloud -uroot -pRoboShop@1 < /app/db/schema.sql &>>$LOG_FILE
-
 mysql -h mysql.daws84s.cloud -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$LOG_FILE
-
 mysql -h mysql.daws84s.cloud -uroot -pRoboShop@1 < /app/db/master-data.sql &>>$LOG_FILE
 VALIDATE $? "Loading MySQL data"
 
