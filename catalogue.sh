@@ -62,6 +62,7 @@ curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue
 VALIDATE $? "Downloading the catalogue app"
 
 rm -rf /app/*
+VALIDATE $? "removing the existing content"
 cd /app 
 VALIDATE $? "Moving to app directory"
 
@@ -87,6 +88,15 @@ cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo
 dnf install mongodb-mongosh -y &>>$LOG_FILE
 VALIDATE $? "Installing MongoDB Client"
 
-mongosh --host mongodb.daws84s.cloud </app/db/master-data.js &>>$LOG_FILE
-VALIDATE $? "Adding data to MongoDB Client" 
+STATUS=$(mongosh --host mongodb.daws84s.cloud --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
+if [ $STATUS -lt 0]
+then
+    mongosh --host mongodb.daws84s.cloud </app/db/master-data.js &>>$LOG_FILE
+    VALIDATE $? "Loading the data in MongoDB Client" 
+else
+    echo -e "Data is already loaded.......... $Y Skipping $N"
+fi
+
+
+
 
