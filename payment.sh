@@ -53,6 +53,7 @@ VALIDATE $? "Creating app directory"
 curl -L -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip  &>>$LOG_FILE
 VALIDATE $? "Downloading the payments app"
 
+cd /app 
 rm -rf /app/*
 unzip /tmp/payment.zip &>>$LOG_FILE
 VALIDATE $? "unzipping payments"
