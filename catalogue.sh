@@ -45,7 +45,7 @@ VALIDATE $? "Enabling nodejs 20"
 dnf install nodejs -y &>>$LOG_FILE
 VALIDATE $? "Installing nodejs:20"
 
-id roboshop
+id roboshop &>>$LOG_FILE
 
 if [ $? -ne 0 ]
 then
