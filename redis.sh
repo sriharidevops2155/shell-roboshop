@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo ""
-
 START_TIME=$(date +%s)
 USERID=$(id -u)
 R="\e[31m"
@@ -32,7 +30,7 @@ VALIDATE()
        echo -e "$2 is ...$G SUCESS $N" | tee -a $LOG_FILE 
     else
        echo -e " $2 is ...$R FAILURE $N "| tee -a $LOG_FILE 
-        exit 1
+       exit 1
     fi
 }
 
@@ -45,7 +43,7 @@ VALIDATE $? "Enabling redis:7"
 dnf install redis -y &>>$LOG_FILE
 VALIDATE $? "Installing redis:7"
 
-sed -i -e "s/127.0.0.1/0.0.0.0/g" -e "/protected-mode/ c protected-mode no" /etc/redis/redis.conf
+sed -i -e 's/127.0.0.1/0.0.0.0/g' -e '/protected-mode/ c protected-mode no' /etc/redis/redis.conf
 VALIDATE $? "Edited redis.conf to accept remote connections"
 
 systemctl enable redis &>>$LOG_FILE
@@ -57,4 +55,4 @@ VALIDATE $? "Starting redis:7"
 END_TIME=$(date +%s)
 TOTAL_TIME=$(($END_TIME - $START_TIME))
 
-echo -e "Script execution completed sucessfully, $Y time taken:  $TOTAL_TIME $N" | tee -a $LOG_FILE
+echo -e "Script execution completed sucessfully, $Y time taken:  $TOTAL_TIME Seconds $N" | tee -a $LOG_FILE
