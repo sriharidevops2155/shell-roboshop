@@ -6,7 +6,8 @@ INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipp
 ZONE_ID="Z00174153HJ610LT4L6PX"
 DOMAIN_NAME="daws84s.cloud"
 
-#for instance in ${INSTANCES[@]}
+#for instance in ${INSTANCES[@]}   This is to pass the all the variables
+#for instance in $@ This is to pass the instances in run time
 for instance in $@
 do
     INSTANCE_ID=$(aws ec2 run-instances \
