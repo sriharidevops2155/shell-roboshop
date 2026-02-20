@@ -23,6 +23,9 @@ else
     echo "You are running with root access" | tee -a $LOG_FILE 
 fi
 
+echo "Please enter root password to setup"
+read -s MYSQL_ROOT_PASSWORD
+
 #validating if installation is sucedded or not 
 VALIDATE()
 {
@@ -82,9 +85,9 @@ mysql -h mysql.daws84s.cloud -u root -pRoboShop@1 -e 'use cities'
 
 if [ $? -ne 0 ]
 then
-    mysql -h mysql.daws84s.cloud -uroot -pRoboShop@1 < /app/db/schema.sql &>>$LOG_FILE
-    mysql -h mysql.daws84s.cloud -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$LOG_FILE
-    mysql -h mysql.daws84s.cloud -uroot -pRoboShop@1 < /app/db/master-data.sql &>>$LOG_FILE
+    mysql -h mysql.daws84s.cloud -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/schema.sql &>>$LOG_FILE
+    mysql -h mysql.daws84s.cloud -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/app-user.sql &>>$LOG_FILE
+    mysql -h mysql.daws84s.cloud -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/master-data.sql &>>$LOG_FILE
     VALIDATE $? "Loading MySQL data"
 else
     echo -e "Data is loaded already loaded into MYSQL... $Y SKIPPING $N"
